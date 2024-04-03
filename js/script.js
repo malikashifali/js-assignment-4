@@ -116,10 +116,14 @@ const findWord = () => {
 // replace word 
 const replaceWord = () => {
     let currentWord = document.getElementById("inputField").value;
-    let newWord = prompt("please enter new word")
-    if (!currentWord || !newWord) {
+    if (!currentWord) {
         alert("please enter a word correctly")
-        return
+        return;
+    }
+    let newWord = prompt("please enter new word")
+    if (!newWord) {
+        alert("please enter a new word correctly")
+        return;
     }
     currentWord = currentWord.toLowerCase();
     newWord = newWord.toLowerCase();
@@ -140,11 +144,3 @@ const clearOutput = () => {
 const clearInput=()=>{
     document.getElementById("inputField").value = ""
 }
-
-
-
-
-
-
-
-
