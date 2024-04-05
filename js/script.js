@@ -4,6 +4,38 @@ let cities = ["Islamabad", "Lahore", "Karachi", "Peshawar", "Quetta"]
 
 // ---------------------------------------------------------------------------------------------------------------
 
+// showNotification
+const showNotification=(msg, type)=>{
+let bgColor;
+switch (type) {
+    case "success":
+        bgColor = "linear-gradient(to right, #1D976C, #93F9B9)"
+        break;
+    case "error":
+        bgColor = "linear-gradient(to right, #93291e, #ed213a)"
+        break;
+    default:
+        break;
+}
+
+Toastify({
+    text: msg,
+    duration: 3000,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "left", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: bgColor,
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
+
+}
+
+
 // convert to lowercase 
 const lowercase = () => {
     let lowercase = originalString.toLowerCase()
@@ -26,7 +58,7 @@ const capitalize = () => {
 const betterFormatting = () => {
     let word = document.getElementById("inputField").value
     if (word.length < 3) {
-        alert("please enter a word correctly")
+        showNotification("please enter a word correctly", "error")
         return
     }
     let wordFirstLetter = word.charAt(0).toUpperCase();
@@ -47,7 +79,7 @@ const printCities = () => {
 const addCity = () => {
     let city = document.getElementById("inputField").value;
     if (!city) {
-        alert("please add city name correctly")
+        showNotification("please enter city name correctly", "error")
         return;
     }
     let newCityFirstLetter = city.charAt(0).toUpperCase();
@@ -64,6 +96,7 @@ const addCity = () => {
     if (isCityFound === false) {
         cities.push(newCityInCapitalize)
         document.getElementById("output").innerHTML = `<span class='text-success'>&quot;${newCityInCapitalize}&quot;</span> has been successfully added into the list`
+        showNotification("new city has been successfully added", "success")
         const printCities = () => {
             document.getElementById("output").innerHTML = ""
             for (let i = 0; i < cities.length; i++) {
@@ -78,7 +111,7 @@ const addCity = () => {
 const checkCity = () => {
     let checkCity = document.getElementById("inputField").value;
     if (!checkCity) {
-        alert("please enter city name correctly")
+        showNotification("please enter city name correctly", "error")
         return;
     }
     let checkCityFirstLetter = checkCity.charAt(0).toUpperCase();
@@ -100,7 +133,7 @@ const checkCity = () => {
 const findWord = () => {
     let word = document.getElementById("inputField").value;
     if (!word) {
-        alert("please enter word correctly")
+        showNotification("please enter word correctly", "error")
         return;
     }
     word = word.toLowerCase();
@@ -117,12 +150,12 @@ const findWord = () => {
 const replaceWord = () => {
     let currentWord = document.getElementById("inputField").value;
     if (!currentWord) {
-        alert("please enter a word correctly")
+        showNotification("please enter a word correctly", "error")
         return;
     }
     let newWord = prompt("please enter new word")
     if (!newWord) {
-        alert("please enter a new word correctly")
+        showNotification("please enter a new word correctly", "error")
         return;
     }
     currentWord = currentWord.toLowerCase();
